@@ -1,0 +1,44 @@
+import cv2
+import numpy as np
+import datetime
+import time
+from widgets import Button
+from obstacle import Lightwork
+#摄像头编号
+cam1=1
+cam2=0
+#程序开启运行开关
+start_button = Button(1, "UP")
+#程序关闭开关
+stop_button = Button(1, "DOWN")
+camera = cv2.VideoCapture(cam1)
+camera = cv2.VideoCapture(cam2)
+camera .set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+camera .set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+
+camera = cv2.VideoCapture(cam1)
+camera .set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+camera .set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+
+btn=0
+if __name__ == "__main__":
+    if cam1==1:
+        result_dir="./front_image"
+    #cam=1
+    if cam2==0:
+        result_dir = "./side_image"
+
+
+    print("Start!")
+    print('''Press the "Down button" to take photos!''')
+    while True:
+        if stop_button.clicked():
+            print("btn",btn)
+            path = "{}/{}.png".format(result_dir, btn)
+            btn+=1
+            time.sleep(0.2)
+            return_value, image = camera.read()
+            name = "{}.png".format(btn)
+            cv2.imwrite(path, image)
+    del(camera)
+
